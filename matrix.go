@@ -1,4 +1,4 @@
-package GoMatLib
+package lib
 
 type Matrix4x4[T Number] struct {
 	M11, M12, M13, M14,

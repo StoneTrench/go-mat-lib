@@ -1,4 +1,4 @@
-package GoMatLib
+package lib
 
 import (
 	"crypto/rand"
