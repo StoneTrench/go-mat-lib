@@ -1,6 +1,10 @@
-package lib
+package vec
 
-import "math"
+import (
+	"math"
+
+	. "github.com/StoneTrench/go-mat-lib/const"
+)
 
 type Vector3[T Number] struct {
 	X, Y, Z T
@@ -21,6 +25,10 @@ func InitVector3F(x, y, z float32) Vector3F {
 		Y: y,
 		Z: z,
 	}
+}
+
+func Vector3Cast[To Number, From Number](v Vector3[From]) Vector3[To] {
+	return InitVector3(To(v.X), To(v.Y), To(v.Z))
 }
 
 func (self Vector3[T]) Scale(s T) Vector3[T] {
@@ -52,6 +60,20 @@ func (self Vector3[T]) Apply(fn func(x T) (y T)) Vector3[T] {
 	self.X = fn(self.X)
 	self.Y = fn(self.Y)
 	self.Z = fn(self.Z)
+	return self
+}
+
+func (self Vector3[T]) MinXYZ(x, y, z T) Vector3[T] {
+	self.X = min(self.X, x)
+	self.Y = min(self.Y, y)
+	self.Z = min(self.Z, z)
+	return self
+}
+
+func (self Vector3[T]) MaxXYZ(x, y, z T) Vector3[T] {
+	self.X = max(self.X, x)
+	self.Y = max(self.Y, y)
+	self.Z = max(self.Z, z)
 	return self
 }
 
@@ -144,9 +166,9 @@ func (self Vector3[T]) Normalize() Vector3[T] {
 }
 
 func (self Vector3[T]) Abs() Vector3[T] {
-	self.X = abs(self.X)
-	self.Y = abs(self.Y)
-	self.Z = abs(self.Z)
+	self.X = Abs(self.X)
+	self.Y = Abs(self.Y)
+	self.Z = Abs(self.Z)
 	return self
 }
 

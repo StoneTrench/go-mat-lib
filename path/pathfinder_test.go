@@ -1,9 +1,11 @@
-package lib
+package path
 
 import (
 	"errors"
 	"fmt"
 	"testing"
+
+	. "github.com/StoneTrench/go-mat-lib/vec"
 )
 
 func TestPathfinder(t *testing.T) {

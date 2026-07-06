@@ -1,8 +1,10 @@
-package lib
+package other
 
 import (
 	"iter"
 	"math"
+
+	. "github.com/StoneTrench/go-mat-lib/vec"
 )
 
 type AABB[T Number] struct {

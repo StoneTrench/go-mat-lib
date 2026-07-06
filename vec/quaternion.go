@@ -1,6 +1,10 @@
-package lib
+package vec
 
-import "math"
+import (
+	"math"
+
+	. "github.com/StoneTrench/go-mat-lib/const"
+)
 
 type Quaternion[T Number] struct {
 	W, X, Y, Z T
@@ -15,7 +19,7 @@ func InitQuaternion[T Number]() Quaternion[T] {
 	}
 }
 func InitAngleAxis[T Number](angle, x, y, z T) Quaternion[T] {
-	sin, cos := sincos(angle / 2)
+	sin, cos := Sincos(angle / 2)
 	return Quaternion[T]{
 		W: cos,
 		X: x * sin,
@@ -65,11 +69,12 @@ func (q Quaternion[T]) Conjugate() Quaternion[T] {
 // MulVec is a passive rotation.
 //
 // Active rotation is when the point is rotated with respect to the coordinate system, and passive rotation is when the coordinate system is rotated with respect to the point. The two rotations are opposite from each other.
-// func (q Quaternion[T]) MulVec(v Vector3) Vector3 {
-// 	vQuat := Quaternion[T]{W: 0, X: v.X, Y: v.Y, Z: v.Z}
-// 	res := q.MulQuat(vQuat).MulQuat(q.Conjugate())
-// 	return Vector3{X: res.X, Y: res.Y, Z: res.Z}
-// }
+//
+//	func (q Quaternion[T]) MulVec(v Vector3) Vector3 {
+//		vQuat := Quaternion[T]{W: 0, X: v.X, Y: v.Y, Z: v.Z}
+//		res := q.MulQuat(vQuat).MulQuat(q.Conjugate())
+//		return Vector3{X: res.X, Y: res.Y, Z: res.Z}
+//	}
 func (q Quaternion[T]) MulVec(v Vector3[T]) Vector3[T] {
 	numX := q.X * 2
 	numY := q.Y * 2
